@@ -3,7 +3,7 @@ import UIKit
 class CitiesViewController: UIViewController {
     
     private var cities: [List] = []
-    private var filterCities: [List] = []
+    private var filteredCities: [List] = []
     private let networking = Networking()
     
     
@@ -35,8 +35,11 @@ class CitiesViewController: UIViewController {
         networking.getCities { result in
             switch result {
             case .success(let response):
-                self.cities = response.list
-                print(response)
+                let sortedList = response.list.sorted {
+                    return $0.name < $1.name
+                    }
+                self.cities = sortedList
+                self.filteredCities = sortedList
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error)
@@ -48,12 +51,12 @@ class CitiesViewController: UIViewController {
 
 extension CitiesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cities.count
+        return filteredCities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CitiesViewCell", for: indexPath) as! CitiesViewCell
-        cell.configure(item: cities[indexPath.row])
+        cell.configure(item: filteredCities[indexPath.row])
         return cell
     }
 }
@@ -66,31 +69,17 @@ extension CitiesViewController: UITableViewDelegate {
         self.navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    func addCity(cities: List) {
-        filterCities.append(cities)
-        tableView.reloadData()
-    }
     
-    func editCity(at index: Int, cities: List) {
-        filterCities[index] = cities
-        tableView.reloadData()
-    }
-    
-    func deleteCity(at index: Int) {
-        filterCities.remove(at: index)
-        tableView.reloadData()
-    }
 }
 
 extension CitiesViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            filterCities = cities
+            filteredCities = cities
         }
         else {
-            filterCities = cities.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+            filteredCities = cities.filter { $0.name.lowercased().contains(searchText.lowercased()) }
         }
-        
         tableView.reloadData()
     }
 }
