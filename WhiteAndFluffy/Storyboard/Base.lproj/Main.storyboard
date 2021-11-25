@@ -37,7 +37,13 @@
                             <constraint firstItem="DSc-IK-cgr" firstAttribute="leading" secondItem="yhI-UD-dY9" secondAttribute="leading" id="q9H-tZ-Hx8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Weather" id="I6S-la-j3A"/>
+                    <navigationItem key="navigationItem" title="Weather" id="I6S-la-j3A">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="FZx-sN-S71">
+                            <connections>
+                                <action selector="addDidTapButton:" destination="o1f-EF-eMW" id="erp-i8-S0J"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="navigationItem" destination="I6S-la-j3A" id="CO9-xP-zcV"/>
                         <outlet property="tableView" destination="DSc-IK-cgr" id="Vcy-1Y-oNv"/>
@@ -68,9 +74,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEa-WZ-KBe">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEa-WZ-KBe">
                                 <rect key="frame" x="16" y="347" width="382" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OBn-vu-5g9">
+                                <rect key="frame" x="219" y="346" width="44" height="26"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -80,13 +92,17 @@
                         <constraints>
                             <constraint firstItem="BEa-WZ-KBe" firstAttribute="leading" secondItem="Q7r-Ic-HJc" secondAttribute="leading" constant="16" id="7Vv-AG-Bfu"/>
                             <constraint firstItem="SU1-56-ON8" firstAttribute="top" secondItem="Q7r-Ic-HJc" secondAttribute="top" constant="90" id="IM2-3z-FCu"/>
+                            <constraint firstItem="OBn-vu-5g9" firstAttribute="top" secondItem="CFw-yW-ZxN" secondAttribute="bottom" constant="42.5" id="IXm-yD-iLe"/>
                             <constraint firstItem="Q7r-Ic-HJc" firstAttribute="trailing" secondItem="SU1-56-ON8" secondAttribute="trailing" constant="16" id="Q64-La-gFx"/>
+                            <constraint firstItem="OBn-vu-5g9" firstAttribute="leading" secondItem="Q7r-Ic-HJc" secondAttribute="leading" constant="219" id="Q87-bX-zxv"/>
+                            <constraint firstItem="Q7r-Ic-HJc" firstAttribute="trailing" secondItem="OBn-vu-5g9" secondAttribute="trailing" constant="151" id="QSO-es-708"/>
                             <constraint firstItem="Q7r-Ic-HJc" firstAttribute="trailing" secondItem="BEa-WZ-KBe" secondAttribute="trailing" constant="16" id="TA6-kM-1yw"/>
                             <constraint firstItem="CFw-yW-ZxN" firstAttribute="top" secondItem="SU1-56-ON8" secondAttribute="bottom" constant="70" id="dpi-rJ-Rdn"/>
                             <constraint firstItem="SU1-56-ON8" firstAttribute="leading" secondItem="Q7r-Ic-HJc" secondAttribute="leading" constant="16" id="gAg-gC-A6g"/>
                             <constraint firstItem="BEa-WZ-KBe" firstAttribute="top" secondItem="CFw-yW-ZxN" secondAttribute="bottom" constant="43.5" id="mjt-jt-0UZ"/>
                             <constraint firstItem="CFw-yW-ZxN" firstAttribute="leading" secondItem="Q7r-Ic-HJc" secondAttribute="leading" constant="16" id="rdi-mu-qKf"/>
                             <constraint firstItem="Q7r-Ic-HJc" firstAttribute="trailing" secondItem="CFw-yW-ZxN" secondAttribute="trailing" constant="16" id="wD0-nn-kUz"/>
+                            <constraint firstItem="Q7r-Ic-HJc" firstAttribute="bottom" secondItem="OBn-vu-5g9" secondAttribute="bottom" constant="490" id="xSg-i8-8CM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="y5G-N8-2ys"/>

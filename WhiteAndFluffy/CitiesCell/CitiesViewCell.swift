@@ -21,6 +21,6 @@ class CitiesViewCell: UITableViewCell {
     func configure(item: List) {
         nameCityLabel.text = item.name
         weatherLabel.text = item.weather[0].weatherDescription
-        tempLabel.text = String(item.main.temp)
+        tempLabel.text = String(Int(item.main.temp - 273.15))
     }
 }

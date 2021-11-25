@@ -4,9 +4,13 @@ class CitiesViewController: UIViewController {
 
     private var cities: [List] = []
     private let networking = Networking()
+   
     
-    
-    
+    @IBAction func addDidTapButton(_ sender: Any) {
+        let alert = UIAlertController(title: "Погода", message: "У природы нет плохой погоды", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+        self.present(alert, animated: true, completion: nil)
+    }
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
@@ -49,13 +53,9 @@ extension CitiesViewController: UITableViewDataSource {
 extension CitiesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewcontroller = storyboard.instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
-//        viewcontroller.noteText = filteredNotes[indexPath.row].description
-//        viewcontroller.actionType = .edit
-//        viewcontroller.delegate = self
-//        viewcontroller.index = indexPath.row
-        self.navigationController?.pushViewController(viewcontroller, animated: true)
-        
+        let viewController = storyboard.instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
+        viewController.item = cities[indexPath.row]
+        self.navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
