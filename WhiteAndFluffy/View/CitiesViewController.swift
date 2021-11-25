@@ -1,10 +1,18 @@
 import UIKit
 
 class CitiesViewController: UIViewController {
-
+    
     private var cities: [List] = []
+    private var filterCities: [List] = []
     private let networking = Networking()
-   
+    
+    
+    @IBOutlet weak var searchBar: UISearchBar! {
+        didSet {
+            searchBar.delegate = self
+            searchBar.placeholder = "Введите город"
+        }
+    }
     
     @IBAction func addDidTapButton(_ sender: Any) {
         let alert = UIAlertController(title: "Погода", message: "У природы нет плохой погоды", preferredStyle: UIAlertController.Style.alert)
@@ -19,7 +27,7 @@ class CitiesViewController: UIViewController {
             
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
@@ -35,14 +43,14 @@ class CitiesViewController: UIViewController {
             }
         }
     }
-   
+    
 }
 
 extension CitiesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cities.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CitiesViewCell", for: indexPath) as! CitiesViewCell
         cell.configure(item: cities[indexPath.row])
@@ -58,6 +66,32 @@ extension CitiesViewController: UITableViewDelegate {
         self.navigationController?.pushViewController(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    func addCity(cities: List) {
+        filterCities.append(cities)
+        tableView.reloadData()
+    }
+    
+    func editCity(at index: Int, cities: List) {
+        filterCities[index] = cities
+        tableView.reloadData()
+    }
+    
+    func deleteCity(at index: Int) {
+        filterCities.remove(at: index)
+        tableView.reloadData()
+    }
 }
 
+extension CitiesViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filterCities = cities
+        }
+        else {
+            filterCities = cities.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        }
+        
+        tableView.reloadData()
+    }
+}
 

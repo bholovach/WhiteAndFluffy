@@ -6,11 +6,6 @@ class Networking {
         getData(url: url, completion: completion)
     }
     
-//    func getWeather(cityName: String, completion: @escaping (Result<Welcome, Error>) -> ()) {
-//        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=64a19fc4d602039b9dcc9826ea8fc20b") else { return }
-//        getData(url: url, completion: completion)
-//    }
-    
     func getData<T: Codable>(url: URL, completion: @escaping (Result<T, Error>) -> ()) {
         let session = URLSession.shared
         session.dataTask(with: url) { (data, response, error) in
